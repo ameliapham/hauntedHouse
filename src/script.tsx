@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { Timer } from 'three/examples/jsm/misc/Timer.js';
 import GUI from "lil-gui"
 
 console.log("Hello, Three.js with TypeScript!");
@@ -14,9 +15,27 @@ const scene = new THREE.Scene();
 const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
 
+// --- Objects ---
+// Sphere 
+const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 32, 32),
+    new THREE.MeshStandardMaterial({
+        roughness : 0.5
+    })
+)
+scene.add(sphere)
+
+// --- Lights ---
+const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
+directionalLight.position.set(2, 2, 0)
+
+scene.add(ambientLight, directionalLight)
+
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
-camera.position.z = 3
+camera.position.z = 5
 scene.add(camera)
 
 // --- Controls ---
@@ -40,11 +59,12 @@ window.addEventListener("resize", () => {
 })
 
 // --- Render Loop ---
-const clock = new THREE.Clock()
+const timer = new Timer()
 
 function animate(){
-    // Clock
-    const elapsedTime = clock.getElapsedTime()
+    // Timer
+    timer.update()
+    const elapsedTime = timer.getElapsed()
 
     // Update control
     controls.update()
