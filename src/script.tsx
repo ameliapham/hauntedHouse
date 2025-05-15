@@ -16,17 +16,54 @@ const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
 
 // --- Objects ---
-// Ground
-const ground = new THREE.Mesh(
+// Platform ---------------------------
+const platform = new THREE.Mesh(
     new THREE.PlaneGeometry(20, 20),
     new THREE.MeshStandardMaterial()
 )
-ground.rotation.x = - Math.PI/2
-scene.add(ground)
+platform.rotation.x = - Math.PI/2
+scene.add(platform)
 
-// House container
+// House -----------------------
 const house = new THREE.Group()
 scene.add(house)
+
+// Ground floor
+const groundFloor = new THREE.Group()
+house.add(groundFloor)
+
+const foundation = new THREE.Mesh(
+    new THREE.BoxGeometry(2, 0.9, 2),
+    new THREE.MeshStandardMaterial()
+)
+foundation.position.y = 0.45
+groundFloor.add(foundation)
+
+// Steps
+const entrySteps = new THREE.Group()
+groundFloor.add(entrySteps)
+entrySteps.position.y = 0.15
+
+const firstStep = new THREE.Mesh(
+    new THREE.BoxGeometry(2, 0.3, 1),
+    new THREE.MeshStandardMaterial()
+)
+firstStep.position.set (0, 0, 1.5)
+entrySteps.add(firstStep)
+
+const secondStep = new THREE.Mesh(
+    new THREE.BoxGeometry(1.7, 0.3, 0.8),
+    new THREE.MeshStandardMaterial()
+)
+secondStep.position.set (0, 0.3, 1.4)
+entrySteps.add(secondStep)
+
+const thirdStep = new THREE.Mesh(
+    new THREE.BoxGeometry(1.4, 0.3, 0.6),
+    new THREE.MeshStandardMaterial()
+)
+thirdStep.position.set (0, 0.6, 1.3)
+entrySteps.add(thirdStep)
 
 // First Floor
 const firstFloor = new THREE.Mesh(
@@ -34,7 +71,7 @@ const firstFloor = new THREE.Mesh(
     new THREE.MeshStandardMaterial()
 )
 firstFloor.rotation.y = Math.PI/4
-firstFloor.position.y = 1.25
+firstFloor.position.y = 2.9
 house.add(firstFloor)
 
 // Second Floor
@@ -42,29 +79,30 @@ const secondFloor = new THREE.Mesh(
     new THREE.CylinderGeometry(1.2, 1.2, 2.1, 3, 1),
     new THREE.MeshStandardMaterial()
 )
-secondFloor.position.y = 3.8
+secondFloor.position.y = 5.5
 secondFloor.rotation.x = - Math.PI/2
 house.add(secondFloor)
 
-// Roofs
-const roofs = new THREE.Group()
+// Main Roofs
+const mainRoofs = new THREE.Group()
 const roofLeft = new THREE.Mesh(
     new THREE.BoxGeometry(2.5, 3, 0.1),
     new THREE.MeshStandardMaterial()
 )
-roofLeft.position.set(0, 3.8, -0.75)
+roofLeft.position.set(0, 0, -0.75)
 roofLeft.rotation.x = Math.PI * 0.168
 
 const roofRight = new THREE.Mesh(
     new THREE.BoxGeometry(2.5, 3, 0.1),
     new THREE.MeshStandardMaterial()
 )
-roofRight.position.set(0, 3.8, 0.75)
+roofRight.position.set(0, 0, 0.75)
 roofRight.rotation.x = - Math.PI * 0.168
 
-roofs.add(roofLeft, roofRight)
-roofs.rotation.y = Math.PI/2
-house.add(roofs)
+mainRoofs.add(roofLeft, roofRight)
+mainRoofs.rotation.y = Math.PI/2
+mainRoofs.position.y = 5.5
+house.add(mainRoofs)
 
 // --- Lights ---
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
@@ -76,7 +114,8 @@ scene.add(ambientLight, directionalLight)
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
-camera.position.set(4, 10, 0)
+camera.position.set(-4, 5, 10)
+console.log(camera.position)
 camera.lookAt(house.position)
 scene.add(camera)
 
