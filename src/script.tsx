@@ -104,6 +104,79 @@ mainRoofs.rotation.y = Math.PI/2
 mainRoofs.position.y = 5.5
 house.add(mainRoofs)
 
+// Door
+const door = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 2, 0.15),
+    new THREE.MeshStandardMaterial()
+)
+door.position.set(0, 1.9, 0.95)
+house.add(door)
+
+// Window house's frame
+const windowHouse = new THREE.Group()
+windowHouse.position.set(0, 4.8, 1.05)
+scene.add(windowHouse)
+
+const frame1 = new THREE.Mesh(
+    new THREE.BoxGeometry(0.5, 0.05, 0.2),
+    new THREE.MeshStandardMaterial()
+)
+windowHouse.add(frame1)
+
+const frame2 = new THREE.Mesh(
+    new THREE.BoxGeometry(0.6, 0.05, 0.2),
+    new THREE.MeshStandardMaterial()
+)
+frame2.rotation.z = 1.8
+frame2.position.set(-0.3, 0.3, 0)
+windowHouse.add(frame2)
+
+const frame3 = new THREE.Mesh(
+    new THREE.BoxGeometry(0.6, 0.05, 0.2),
+    new THREE.MeshStandardMaterial()
+)
+frame3.rotation.z = -1.8
+frame3.position.set(0.3, 0.3, 0)
+windowHouse.add(frame3)
+
+const frame4 = new THREE.Mesh(
+    new THREE.BoxGeometry(0.7, 0.05, 0.2),
+    new THREE.MeshStandardMaterial()
+)
+frame4.rotation.z = -0.8
+frame4.position.set(0.2, 0.78, 0)
+windowHouse.add(frame4)
+
+const frame5 = new THREE.Mesh(
+    new THREE.BoxGeometry(0.7, 0.05, 0.2),
+    new THREE.MeshStandardMaterial()
+)
+frame5.rotation.z = 0.8
+frame5.position.set(-0.2, 0.78, 0)
+windowHouse.add(frame5)
+
+// Bushes ---------------------------------
+const bush1 = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 32, 16, 0),
+    new THREE.MeshStandardMaterial({color: "green"})
+)
+bush1.position.set(1.8, 0.5, 0)
+scene.add(bush1)
+
+const bush2 = new THREE.Mesh(
+    new THREE.SphereGeometry(0.5, 32, 16, 0),
+    new THREE.MeshStandardMaterial({color: "green"})
+)
+bush2.position.set(1.5, 0.2, 1.2)
+scene.add(bush2)
+
+const bush3 = new THREE.Mesh(
+    new THREE.SphereGeometry(1.3, 32, 16, 0),
+    new THREE.MeshStandardMaterial({color: "green"})
+)
+bush3.position.set(-1.6, 0.6, -1.7)
+scene.add(bush3)
+
 // --- Lights ---
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
 
@@ -114,14 +187,15 @@ scene.add(ambientLight, directionalLight)
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
-camera.position.set(-4, 5, 10)
-console.log(camera.position)
-camera.lookAt(house.position)
-scene.add(camera)
+camera.position.set(0, 5, 6)
+const cameraHelper = new THREE.CameraHelper(camera)
+scene.add(camera, cameraHelper)
 
 // --- Controls ---
 const controls = new OrbitControls(camera, canvas)
+controls.target.set(0, 5, 0)
 controls.enableDamping = true
+controls.update()
 
 // --- Renderer Setup ---
 const renderer = new THREE.WebGLRenderer({ canvas: canvas });
