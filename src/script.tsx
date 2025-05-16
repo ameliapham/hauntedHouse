@@ -24,7 +24,7 @@ const platform = new THREE.Mesh(
 platform.rotation.x = - Math.PI/2
 scene.add(platform)
 
-// House -----------------------
+// House -------------------------------
 const house = new THREE.Group()
 scene.add(house)
 
@@ -156,26 +156,44 @@ frame5.position.set(-0.2, 0.78, 0)
 windowHouse.add(frame5)
 
 // Bushes ---------------------------------
-const bush1 = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 32, 16, 0),
-    new THREE.MeshStandardMaterial({color: "green"})
-)
+const bushGeometry = new THREE.SphereGeometry(1, 32, 16, 0)
+const bushMaterial = new THREE.MeshStandardMaterial({color: "green"})
+
+const bush1 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush1.position.set(1.8, 0.5, 0)
-scene.add(bush1)
 
-const bush2 = new THREE.Mesh(
-    new THREE.SphereGeometry(0.5, 32, 16, 0),
-    new THREE.MeshStandardMaterial({color: "green"})
-)
+const bush2 = new THREE.Mesh(bushGeometry, bushMaterial)
+bush2.scale.set(0.5, 0.5, 0.5)
 bush2.position.set(1.5, 0.2, 1.2)
-scene.add(bush2)
 
-const bush3 = new THREE.Mesh(
-    new THREE.SphereGeometry(1.3, 32, 16, 0),
-    new THREE.MeshStandardMaterial({color: "green"})
-)
+const bush3 = new THREE.Mesh(bushGeometry, bushMaterial)
+bush3.scale.set(1.3, 1.3, 1.3)
 bush3.position.set(-1.6, 0.6, -1.7)
-scene.add(bush3)
+scene.add(bush1, bush2, bush3)
+
+// Graves -------------------------------------
+const graveGeometry = new THREE.BoxGeometry(0.6, 0.8, 0.2)
+const graveMaterial = new THREE.MeshStandardMaterial()
+
+const graves = new THREE.Group()
+scene.add(graves)
+
+for(let i = 0; i < 30; i++){
+    const angle = Math.random() * Math.PI * 2
+    const radius = 4 + 4 * Math.random() // Khoảng cách an toàn xung quanh house
+    const x = Math.sin(angle) * radius
+    const z = Math.cos(angle) * radius
+
+    const grave = new THREE.Mesh(graveGeometry, graveMaterial)
+    grave.position.x = x 
+    grave.position.y = Math.random() * 0.4 // Graves thò thụt
+    grave.position.z = z
+    grave.rotation.x = (Math.random() - 0.5) * 0.5 // Graves ngả nghiêng
+    grave.rotation.y = (Math.random() - 0.5) * 0.5 // Graves ngả nghiêng
+    grave.rotation.z = (Math.random() - 0.5) * 0.5 // Graves ngả nghiêng
+
+    graves.add(grave)
+}
 
 // --- Lights ---
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
@@ -193,7 +211,7 @@ scene.add(camera, cameraHelper)
 
 // --- Controls ---
 const controls = new OrbitControls(camera, canvas)
-controls.target.set(0, 5, 0)
+controls.target.set(0, 0, 0)
 controls.enableDamping = true
 controls.update()
 
