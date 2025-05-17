@@ -15,11 +15,50 @@ const scene = new THREE.Scene();
 const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
 
+// --- Texture ---
+// Platform ------------------------------
+const textureLoader = new THREE.TextureLoader()
+
+const platformAlphaTexture = textureLoader.load('public/texture/platform/alpha.webp')
+const platformAColorTexture = textureLoader.load('public/texture/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_diff_1k.webp')
+const platformARMTexture = textureLoader.load('public/texture/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_arm_1k.webp')
+const platformNormalTexture = textureLoader.load('public/texture/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_nor_gl_1k.webp')
+const platformDisplacementTexture = textureLoader.load('public/texture/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_disp_1k.webp')
+
+platformAColorTexture.colorSpace = THREE.SRGBColorSpace
+
+platformAColorTexture.repeat.set(8, 8)
+platformAColorTexture.wrapS = THREE.RepeatWrapping
+platformAColorTexture.wrapT = THREE.RepeatWrapping
+
+platformARMTexture.repeat.set(8, 8)
+platformARMTexture.wrapS = THREE.RepeatWrapping
+platformARMTexture.wrapT = THREE.RepeatWrapping
+
+platformNormalTexture.repeat.set(8, 8)
+platformNormalTexture.wrapS = THREE.RepeatWrapping
+platformNormalTexture.wrapT = THREE.RepeatWrapping
+
+platformDisplacementTexture.repeat.set(8, 8)
+platformDisplacementTexture.wrapS = THREE.RepeatWrapping
+platformDisplacementTexture.wrapT = THREE.RepeatWrapping
+
 // --- Objects ---
 // Platform ---------------------------
 const platform = new THREE.Mesh(
-    new THREE.PlaneGeometry(20, 20),
-    new THREE.MeshStandardMaterial()
+    new THREE.PlaneGeometry(20, 20, 100, 100),
+    new THREE.MeshStandardMaterial({
+        alphaMap : platformAlphaTexture,
+        transparent : true,
+        map : platformAColorTexture,
+        aoMap : platformARMTexture,
+        roughnessMap : platformARMTexture,
+        metalnessMap : platformARMTexture,
+        normalMap : platformNormalTexture,
+        displacementMap : platformDisplacementTexture,
+        displacementScale : 0.3,
+        displacementBias : - 0.2
+    })
 )
 platform.rotation.x = - Math.PI/2
 scene.add(platform)
