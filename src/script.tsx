@@ -16,9 +16,9 @@ const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
 
 // --- Texture ---
-// Platform ------------------------------
 const textureLoader = new THREE.TextureLoader()
 
+// Platform ------------------------------
 const platformAlphaTexture = textureLoader.load('public/texture/platform/alpha.webp')
 const platformAColorTexture = textureLoader.load('public/texture/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_diff_1k.webp')
 const platformARMTexture = textureLoader.load('public/texture/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_arm_1k.webp')
@@ -27,8 +27,8 @@ const platformDisplacementTexture = textureLoader.load('public/texture/platform/
 
 platformAColorTexture.colorSpace = THREE.SRGBColorSpace
 
-platformAColorTexture.repeat.set(8, 8)
-platformAColorTexture.wrapS = THREE.RepeatWrapping
+platformAColorTexture.repeat.set(8, 8) 
+platformAColorTexture.wrapS= THREE.RepeatWrapping
 platformAColorTexture.wrapT = THREE.RepeatWrapping
 
 platformARMTexture.repeat.set(8, 8)
@@ -42,6 +42,50 @@ platformNormalTexture.wrapT = THREE.RepeatWrapping
 platformDisplacementTexture.repeat.set(8, 8)
 platformDisplacementTexture.wrapS = THREE.RepeatWrapping
 platformDisplacementTexture.wrapT = THREE.RepeatWrapping
+
+// First Floors ------------------------------
+const firstFloorColorTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_diff_1k.jpg')
+const firstFloorARMTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_arm_1k.jpg')
+const firstFloorNormalTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_nor_gl_1k.jpg')
+
+firstFloorColorTexture.colorSpace = THREE.SRGBColorSpace
+
+firstFloorColorTexture.repeat.set(5, 4)
+firstFloorColorTexture.wrapS = THREE.RepeatWrapping
+firstFloorColorTexture.wrapT = THREE.RepeatWrapping
+
+firstFloorARMTexture.repeat.set(5, 4)
+firstFloorARMTexture.wrapS = THREE.RepeatWrapping
+firstFloorARMTexture.wrapT = THREE.RepeatWrapping
+
+firstFloorNormalTexture.repeat.set(5, 4)
+firstFloorNormalTexture.wrapS = THREE.RepeatWrapping
+firstFloorNormalTexture.wrapT = THREE.RepeatWrapping
+
+// Second Floors ------------------------------
+const secondFloorColorTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_diff_1k.jpg')
+const secondFloorARMTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_arm_1k.jpg')
+const secondFloorNormalTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_nor_gl_1k.jpg')
+
+secondFloorColorTexture.colorSpace = THREE.SRGBColorSpace
+
+secondFloorColorTexture.center.set(0.5, 0.5)
+secondFloorColorTexture.rotation = Math.PI /2
+secondFloorColorTexture.repeat.set(3, 3)
+secondFloorColorTexture.wrapS = THREE.RepeatWrapping
+secondFloorColorTexture.wrapT = THREE.RepeatWrapping
+
+secondFloorARMTexture.center.set(0.5, 0.5)
+secondFloorARMTexture.rotation = Math.PI /2
+secondFloorARMTexture.repeat.set(3, 3)
+secondFloorARMTexture.wrapS = THREE.RepeatWrapping
+secondFloorARMTexture.wrapT = THREE.RepeatWrapping
+
+secondFloorNormalTexture.center.set(0.5, 0.5)
+secondFloorNormalTexture.rotation = Math.PI /2
+secondFloorNormalTexture.repeat.set(3, 3)
+secondFloorNormalTexture.wrapS = THREE.RepeatWrapping
+secondFloorNormalTexture.wrapT = THREE.RepeatWrapping
 
 // --- Objects ---
 // Platform ---------------------------
@@ -79,27 +123,28 @@ foundation.position.y = 0.45
 groundFloor.add(foundation)
 
 // Steps
+const stepMaterial = new THREE.MeshStandardMaterial()
+
 const entrySteps = new THREE.Group()
 groundFloor.add(entrySteps)
 entrySteps.position.y = 0.15
 
 const firstStep = new THREE.Mesh(
     new THREE.BoxGeometry(2, 0.3, 1),
-    new THREE.MeshStandardMaterial()
+    stepMaterial
 )
 firstStep.position.set (0, 0, 1.5)
 entrySteps.add(firstStep)
 
 const secondStep = new THREE.Mesh(
     new THREE.BoxGeometry(1.7, 0.3, 0.8),
-    new THREE.MeshStandardMaterial()
-)
+    stepMaterial)
 secondStep.position.set (0, 0.3, 1.4)
 entrySteps.add(secondStep)
 
 const thirdStep = new THREE.Mesh(
     new THREE.BoxGeometry(1.4, 0.3, 0.6),
-    new THREE.MeshStandardMaterial()
+    stepMaterial
 )
 thirdStep.position.set (0, 0.6, 1.3)
 entrySteps.add(thirdStep)
@@ -107,7 +152,13 @@ entrySteps.add(thirdStep)
 // First Floor
 const firstFloor = new THREE.Mesh(
     new THREE.CylinderGeometry(1.5, 1.3, 4, 4, 1),
-    new THREE.MeshStandardMaterial()
+    new THREE.MeshStandardMaterial({
+        map : firstFloorColorTexture,
+        aoMap : firstFloorARMTexture,
+        roughnessMap : firstFloorARMTexture,
+        metalnessMap : firstFloorARMTexture,
+        normalMap : firstFloorNormalTexture
+    })
 )
 firstFloor.rotation.y = Math.PI/4
 firstFloor.position.y = 2.9
@@ -116,7 +167,13 @@ house.add(firstFloor)
 // Second Floor
 const secondFloor = new THREE.Mesh(
     new THREE.CylinderGeometry(1.2, 1.2, 2.1, 3, 1),
-    new THREE.MeshStandardMaterial()
+    new THREE.MeshStandardMaterial({
+        map : secondFloorColorTexture,
+        aoMap : secondFloorARMTexture,
+        roughnessMap : secondFloorARMTexture,
+        metalnessMap : secondFloorARMTexture,
+        normalMap : secondFloorNormalTexture
+    })
 )
 secondFloor.position.y = 5.5
 secondFloor.rotation.x = - Math.PI/2
@@ -153,7 +210,7 @@ house.add(door)
 
 // Window house's frame
 const windowHouse = new THREE.Group()
-windowHouse.position.set(0, 4.8, 1.05)
+windowHouse.position.set(0, 5, 1.05)
 scene.add(windowHouse)
 
 const frame1 = new THREE.Mesh(
@@ -250,7 +307,7 @@ scene.add(camera, cameraHelper)
 
 // --- Controls ---
 const controls = new OrbitControls(camera, canvas)
-controls.target.set(0, 0, 0)
+controls.target.set(0, 2, 0)
 controls.enableDamping = true
 controls.update()
 
