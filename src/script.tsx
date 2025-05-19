@@ -104,6 +104,18 @@ groundFloorColorTexture.wrapS = groundFloorColorTexture.wrapT = THREE.RepeatWrap
 groundFloorARMTexture.wrapS = groundFloorARMTexture.wrapT = THREE.RepeatWrapping
 groundFloorNormalTexture.wrapS = groundFloorNormalTexture.wrapT = THREE.RepeatWrapping
 
+// Door
+const doorColorTexture = textureLoader.load('public/texture/door/color.webp')
+const doorAlphaTexture = textureLoader.load('public/texture/door/alpha.webp')
+const doorAOTexture = textureLoader.load('public/texture/door/ambientOcclusion.webp')
+const doorHeightTexture = textureLoader.load('public/texture/door/height.webp')
+const doorNormalTexture = textureLoader.load('public/texture/door/normal.webp')
+const doorMetalnessTexture = textureLoader.load('public/texture/door/metalness.webp')
+const doorRoughnessTexture = textureLoader.load('public/texture/door/roughness.webp')
+
+doorColorTexture.colorSpace = THREE.SRGBColorSpace
+
+
 // --- Objects ---
 // Platform ---------------------------
 const platform = new THREE.Mesh(
@@ -247,55 +259,109 @@ mainRoofs.position.y = 5.5
 house.add(mainRoofs)
 
 // Door
-const door = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 2, 0.15),
-    new THREE.MeshStandardMaterial()
-)
-door.position.set(0, 1.9, 0.95)
+// const doorGeometry = new THREE.BoxGeometry(1, 2, 0.15)
+// doorGeometry.clearGroups()
+// for (let i = 0; i < 6; i++) {
+//     doorGeometry.addGroup(i * 6, 6, i) // mỗi mặt có 2 triangles => 6 indices
+// }
+// doorGeometry.setAttribute('uv2', new THREE.BufferAttribute(doorGeometry.attributes.uv.array, 2))
+
+// const frontMaterial = new THREE.MeshStandardMaterial({
+//     map: doorColorTexture,
+//     aoMap: doorAOTexture,
+//     displacementMap: doorHeightTexture,
+//     displacementScale: 0.05,
+//     normalMap: doorNormalTexture,
+//     metalnessMap: doorMetalnessTexture,
+//     roughnessMap: doorRoughnessTexture
+// })
+// const sideMaterial = new THREE.MeshStandardMaterial({
+//     color: 0x444444,
+//     metalness: 0.3,
+//     roughness: 0.8
+// })
+
+// const materials = [
+//      // front
+//     sideMaterial,  // back
+//     sideMaterial,  // top
+//     sideMaterial,  // bottom
+//     sideMaterial,  // right
+//     frontMaterial,
+//     sideMaterial   // left
+// ]
+
+// const door = new THREE.Mesh(doorGeometry, materials)
+// door.position.set(0, 1.9, 0.95)
+// house.add(door)
+
+// Door
+const door = new THREE.Group()
+door.position.set(0, 0.9, 1)
 house.add(door)
 
-// Window house's frame
-const windowHouse = new THREE.Group()
-windowHouse.position.set(0, 5, 1.05)
-scene.add(windowHouse)
-
 const frame1 = new THREE.Mesh(
-    new THREE.BoxGeometry(0.5, 0.05, 0.2),
-    new THREE.MeshStandardMaterial()
+    new THREE.BoxGeometry(1, 0.05, 0.2),
+    groundFloorMaterial
 )
-windowHouse.add(frame1)
+door.add(frame1)
 
 const frame2 = new THREE.Mesh(
-    new THREE.BoxGeometry(0.6, 0.05, 0.2),
-    new THREE.MeshStandardMaterial()
+    new THREE.BoxGeometry(2, 0.05, 0.2),
+    groundFloorMaterial
 )
-frame2.rotation.z = 1.8
-frame2.position.set(-0.3, 0.3, 0)
-windowHouse.add(frame2)
+frame2.rotation.z = 1.7
+frame2.position.set(-0.5, 1, 0)
+door.add(frame2)
 
 const frame3 = new THREE.Mesh(
-    new THREE.BoxGeometry(0.6, 0.05, 0.2),
-    new THREE.MeshStandardMaterial()
+    new THREE.BoxGeometry(2, 0.05, 0.2),
+    groundFloorMaterial
 )
-frame3.rotation.z = -1.8
-frame3.position.set(0.3, 0.3, 0)
-windowHouse.add(frame3)
+frame3.rotation.z = -1.7
+frame3.position.set(0.5, 1, 0)
+door.add(frame3)
 
 const frame4 = new THREE.Mesh(
-    new THREE.BoxGeometry(0.7, 0.05, 0.2),
-    new THREE.MeshStandardMaterial()
+    new THREE.BoxGeometry(1.4, 0.05, 0.2),
+    groundFloorMaterial
 )
 frame4.rotation.z = -0.8
-frame4.position.set(0.2, 0.78, 0)
-windowHouse.add(frame4)
+frame4.position.set(0.35, 2.3, 0)
+door.add(frame4)
 
 const frame5 = new THREE.Mesh(
-    new THREE.BoxGeometry(0.7, 0.05, 0.2),
-    new THREE.MeshStandardMaterial()
+    new THREE.BoxGeometry(1.4, 0.05, 0.2),
+    groundFloorMaterial
 )
 frame5.rotation.z = 0.8
-frame5.position.set(-0.2, 0.78, 0)
-windowHouse.add(frame5)
+frame5.position.set(-0.35, 2.3, 0)
+door.add(frame5)
+
+const frame6 = new THREE.Mesh(
+    new THREE.BoxGeometry(0.6, 0.05, 0.2),
+    groundFloorMaterial
+)
+frame6.rotation.z = -0.5
+frame6.position.set(0.25, 1.2, 0)
+door.add(frame6)
+
+const frame7 = new THREE.Mesh(
+    new THREE.BoxGeometry(0.6, 0.05, 0.2),
+    groundFloorMaterial
+)
+frame7.rotation.z = 0.5
+frame7.position.set(-0.25, 1.2, 0)
+door.add(frame7)
+
+const frame8 = new THREE.Mesh(
+    new THREE.BoxGeometry(2.7, 0.05, 0.2),
+    groundFloorMaterial
+)
+frame8.rotation.z = Math.PI/2
+frame8.position.set(0, 1.35, 0)
+door.add(frame8)
+
 
 // Bushes ---------------------------------
 const bushGeometry = new THREE.SphereGeometry(1, 32, 16, 0)
@@ -343,11 +409,15 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 1)
 const directionalLight = new THREE.DirectionalLight(0xfffffc, 1)
 directionalLight.position.set(2, 10, 0)
 
-scene.add(ambientLight, directionalLight)
+const pointLightDoor = new THREE.PointLight(0xffffff, 3, 0, 2)
+pointLightDoor.position.set(0, 1.9, 1.5)
+
+scene.add(ambientLight, directionalLight, pointLightDoor)
+
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
-camera.position.set(0, 5, 6)
+camera.position.set(0, 2, 6)
 const cameraHelper = new THREE.CameraHelper(camera)
 scene.add(camera, cameraHelper)
 
