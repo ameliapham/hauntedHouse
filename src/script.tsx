@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Timer } from 'three/examples/jsm/misc/Timer.js';
 import GUI from "lil-gui"
+import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHelper" 
 
 console.log("Hello, Three.js with TypeScript!");
 
@@ -259,43 +260,6 @@ mainRoofs.position.y = 5.5
 house.add(mainRoofs)
 
 // Door
-// const doorGeometry = new THREE.BoxGeometry(1, 2, 0.15)
-// doorGeometry.clearGroups()
-// for (let i = 0; i < 6; i++) {
-//     doorGeometry.addGroup(i * 6, 6, i) // mỗi mặt có 2 triangles => 6 indices
-// }
-// doorGeometry.setAttribute('uv2', new THREE.BufferAttribute(doorGeometry.attributes.uv.array, 2))
-
-// const frontMaterial = new THREE.MeshStandardMaterial({
-//     map: doorColorTexture,
-//     aoMap: doorAOTexture,
-//     displacementMap: doorHeightTexture,
-//     displacementScale: 0.05,
-//     normalMap: doorNormalTexture,
-//     metalnessMap: doorMetalnessTexture,
-//     roughnessMap: doorRoughnessTexture
-// })
-// const sideMaterial = new THREE.MeshStandardMaterial({
-//     color: 0x444444,
-//     metalness: 0.3,
-//     roughness: 0.8
-// })
-
-// const materials = [
-//      // front
-//     sideMaterial,  // back
-//     sideMaterial,  // top
-//     sideMaterial,  // bottom
-//     sideMaterial,  // right
-//     frontMaterial,
-//     sideMaterial   // left
-// ]
-
-// const door = new THREE.Mesh(doorGeometry, materials)
-// door.position.set(0, 1.9, 0.95)
-// house.add(door)
-
-// Door
 const door = new THREE.Group()
 door.position.set(0, 0.9, 1)
 house.add(door)
@@ -339,7 +303,7 @@ frame5.position.set(-0.35, 2.3, 0)
 door.add(frame5)
 
 const frame6 = new THREE.Mesh(
-    new THREE.BoxGeometry(0.6, 0.05, 0.2),
+    new THREE.BoxGeometry(0.6, 0.05, 0.05),
     groundFloorMaterial
 )
 frame6.rotation.z = -0.5
@@ -347,7 +311,7 @@ frame6.position.set(0.25, 1.2, 0)
 door.add(frame6)
 
 const frame7 = new THREE.Mesh(
-    new THREE.BoxGeometry(0.6, 0.05, 0.2),
+    new THREE.BoxGeometry(0.6, 0.05, 0.05),
     groundFloorMaterial
 )
 frame7.rotation.z = 0.5
@@ -355,13 +319,34 @@ frame7.position.set(-0.25, 1.2, 0)
 door.add(frame7)
 
 const frame8 = new THREE.Mesh(
-    new THREE.BoxGeometry(2.7, 0.05, 0.2),
+    new THREE.BoxGeometry(2.7, 0.05, 0.05),
     groundFloorMaterial
 )
 frame8.rotation.z = Math.PI/2
 frame8.position.set(0, 1.35, 0)
 door.add(frame8)
 
+const shape = new THREE.Shape()
+shape.moveTo(-0.35, 0)
+shape.lineTo(-0.5, 1)
+shape.lineTo(-0.6, 2)
+shape.lineTo(0, 2.6)
+shape.lineTo(0.6, 2)
+shape.lineTo(0.5, 1)
+shape.lineTo(0.35, 0)
+
+const doorShapeGeometry = new THREE.ShapeGeometry(shape)
+const doorShapeMaterial = new THREE.MeshStandardMaterial({
+  color: 0xaab03c,
+  side: THREE.DoubleSide,
+  transparent: true,
+  opacity: 0.95
+})
+
+const doorShapeMesh = new THREE.Mesh(doorShapeGeometry, doorShapeMaterial)
+doorShapeMesh.rotation.x = 0.04
+doorShapeMesh.position.z = -0.08
+door.add(doorShapeMesh)
 
 // Bushes ---------------------------------
 const bushGeometry = new THREE.SphereGeometry(1, 32, 16, 0)
@@ -409,15 +394,15 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 1)
 const directionalLight = new THREE.DirectionalLight(0xfffffc, 1)
 directionalLight.position.set(2, 10, 0)
 
-const pointLightDoor = new THREE.PointLight(0xffffff, 3, 0, 2)
-pointLightDoor.position.set(0, 1.9, 1.5)
+const rectAreaLightDoor = new THREE.RectAreaLight(0xffffff, 8, 0.5, 2)
+rectAreaLightDoor.position.set(0, 2, 1.5)
 
-scene.add(ambientLight, directionalLight, pointLightDoor)
+scene.add(ambientLight, directionalLight, rectAreaLightDoor)
 
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
-camera.position.set(0, 2, 6)
+camera.position.set(0, 2, 3)
 const cameraHelper = new THREE.CameraHelper(camera)
 scene.add(camera, cameraHelper)
 
