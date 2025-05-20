@@ -365,10 +365,10 @@ doorShape.lineTo(0.35, 0)
 
 const doorShapeGeometry = new THREE.ShapeGeometry(doorShape)
 const doorShapeMaterial = new THREE.MeshStandardMaterial({
-  color: 0xaab03c,
-  side: THREE.DoubleSide,
-  transparent: true,
-  opacity: 0.95
+    color: 0xffff3f,
+    side: THREE.DoubleSide,
+    transparent: true,
+    opacity: 1
 })
 
 const doorShapeMesh = new THREE.Mesh(doorShapeGeometry, doorShapeMaterial)
@@ -378,7 +378,7 @@ door.add(doorShapeMesh)
 
 // Window House
 const windowHouse = new THREE.Group()
-windowHouse.position.set(0, 5.25, 1.08)
+windowHouse.position.set(0, 5.5, 1.08)
 house.add(windowHouse)
 
 const windowFrame = new THREE.Mesh(
@@ -390,10 +390,10 @@ windowHouse.add(windowFrame)
 const windowShape = new THREE.Mesh(
     new THREE.CircleGeometry(0.4, 6),
     new THREE.MeshStandardMaterial({
-        color: 0xaab03c,
+        color: 0xffff3f,
         side: THREE.DoubleSide,
         transparent: true,
-        opacity: 0.95
+        opacity: 1
     })
 )
 windowShape.position.set(0, 0, -0.02)
@@ -458,29 +458,29 @@ for(let i = 0; i < 30; i++){
 }
 
 // --- Lights ---
-const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+const ambientLight = new THREE.AmbientLight(0x86cdff, 0.275)
 
-const directionalLight = new THREE.DirectionalLight(0xfffffc, 1)
-directionalLight.position.set(2, 8, 0)
+const directionalLight = new THREE.DirectionalLight(0x86cdff, 1)
+directionalLight.position.set(4, 8, -5)
 
-const rectAreaLightWindow = new THREE.RectAreaLight(0xffffff, 8, 0.4, 0.4)
-rectAreaLightWindow.position.set(0, 5.3, 1.4)
+const rectAreaLightWindow = new THREE.RectAreaLight(0xffffff, 4, 0.2, 0.3)
+rectAreaLightWindow.position.set(0, 5.6, 1.3)
 
-const rectAreaLightDoor = new THREE.RectAreaLight(0xffffff, 8, 0.5, 2)
-rectAreaLightDoor.position.set(0, 2, 1.5)
+const rectAreaLightDoor = new THREE.RectAreaLight(0xffffff, 6, 0.3, 1.8)
+rectAreaLightDoor.position.set(0, 1.9, 1.5)
 
 scene.add(ambientLight, directionalLight, rectAreaLightWindow, rectAreaLightDoor)
 
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
-camera.position.set(0, 5, 5)
+camera.position.set(0, 2, 5 )
 const cameraHelper = new THREE.CameraHelper(camera)
 scene.add(camera, cameraHelper)
 
 // --- Controls ---
 const controls = new OrbitControls(camera, canvas)
-controls.target.set(0, 4, 0)
+controls.target.set(0, 2, 0)
 controls.enableDamping = true
 controls.update()
 
