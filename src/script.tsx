@@ -105,17 +105,12 @@ groundFloorColorTexture.wrapS = groundFloorColorTexture.wrapT = THREE.RepeatWrap
 groundFloorARMTexture.wrapS = groundFloorARMTexture.wrapT = THREE.RepeatWrapping
 groundFloorNormalTexture.wrapS = groundFloorNormalTexture.wrapT = THREE.RepeatWrapping
 
-// Door
-const doorColorTexture = textureLoader.load('public/texture/door/color.webp')
-const doorAlphaTexture = textureLoader.load('public/texture/door/alpha.webp')
-const doorAOTexture = textureLoader.load('public/texture/door/ambientOcclusion.webp')
-const doorHeightTexture = textureLoader.load('public/texture/door/height.webp')
-const doorNormalTexture = textureLoader.load('public/texture/door/normal.webp')
-const doorMetalnessTexture = textureLoader.load('public/texture/door/metalness.webp')
-const doorRoughnessTexture = textureLoader.load('public/texture/door/roughness.webp')
+// Roof
+const roofColorTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_diff_1k.jpg')
+const roofARMTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_arm_1k.jpg')
+const roofNormalTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_nor_gl_1k.jpg')
 
-doorColorTexture.colorSpace = THREE.SRGBColorSpace
-
+roofColorTexture.colorSpace = THREE.SRGBColorSpace
 
 // --- Objects ---
 // Platform ---------------------------
@@ -146,6 +141,7 @@ const groundFloor = new THREE.Group()
 house.add(groundFloor)
 
 const groundFloorMaterial = new THREE.MeshStandardMaterial({
+    color : 0xa4ac86,
     map : groundFloorColorTexture,
     aoMap : groundFloorARMTexture,
     roughnessMap : groundFloorARMTexture,
@@ -183,6 +179,7 @@ function createStep(width: number, height: number, depth : number, position : [n
     normal.repeat.set(width, depth)
 
     const material = new THREE.MeshStandardMaterial({
+        color : 0xa4ac86,   
         map: color,
         aoMap: arm,
         roughnessMap: arm,
@@ -239,17 +236,26 @@ secondFloor.rotation.x = - Math.PI/2
 house.add(secondFloor)
 
 // Main Roofs
+const roofsMaterial =  new THREE.MeshStandardMaterial({
+    color : 0x586945,
+    map : roofColorTexture,
+    aoMap : roofARMTexture,
+    roughnessMap : roofARMTexture,
+    metalnessMap : roofARMTexture,
+    normalMap : roofNormalTexture
+})
+
 const mainRoofs = new THREE.Group()
 const roofLeft = new THREE.Mesh(
     new THREE.BoxGeometry(2.5, 3, 0.1),
-    new THREE.MeshStandardMaterial()
+    roofsMaterial
 )
 roofLeft.position.set(0, 0, -0.75)
 roofLeft.rotation.x = Math.PI * 0.168
 
 const roofRight = new THREE.Mesh(
     new THREE.BoxGeometry(2.5, 3, 0.1),
-    new THREE.MeshStandardMaterial()
+    roofsMaterial
 )
 roofRight.position.set(0, 0, 0.75)
 roofRight.rotation.x = - Math.PI * 0.168
@@ -415,7 +421,7 @@ for(let i = 0; i < 30; i++){
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
 
 const directionalLight = new THREE.DirectionalLight(0xfffffc, 1)
-directionalLight.position.set(2, 10, 0)
+directionalLight.position.set(2, 8, 0)
 
 const rectAreaLightWindow = new THREE.RectAreaLight(0xffffff, 8, 0.4, 0.4)
 rectAreaLightWindow.position.set(0, 5.3, 1.4)
