@@ -326,16 +326,16 @@ frame8.rotation.z = Math.PI/2
 frame8.position.set(0, 1.35, 0)
 door.add(frame8)
 
-const shape = new THREE.Shape()
-shape.moveTo(-0.35, 0)
-shape.lineTo(-0.5, 1)
-shape.lineTo(-0.6, 2)
-shape.lineTo(0, 2.6)
-shape.lineTo(0.6, 2)
-shape.lineTo(0.5, 1)
-shape.lineTo(0.35, 0)
+const doorShape = new THREE.Shape()
+doorShape.moveTo(-0.35, 0)
+doorShape.lineTo(-0.5, 1)
+doorShape.lineTo(-0.6, 2)
+doorShape.lineTo(0, 2.6)
+doorShape.lineTo(0.6, 2)
+doorShape.lineTo(0.5, 1)
+doorShape.lineTo(0.35, 0)
 
-const doorShapeGeometry = new THREE.ShapeGeometry(shape)
+const doorShapeGeometry = new THREE.ShapeGeometry(doorShape)
 const doorShapeMaterial = new THREE.MeshStandardMaterial({
   color: 0xaab03c,
   side: THREE.DoubleSide,
@@ -347,6 +347,29 @@ const doorShapeMesh = new THREE.Mesh(doorShapeGeometry, doorShapeMaterial)
 doorShapeMesh.rotation.x = 0.04
 doorShapeMesh.position.z = -0.08
 door.add(doorShapeMesh)
+
+// Window House
+const windowHouse = new THREE.Group()
+windowHouse.position.set(0, 5.25, 1.08)
+house.add(windowHouse)
+
+const windowFrame = new THREE.Mesh(
+    new THREE.TorusGeometry(0.4, 0.03, 3, 6),
+    groundFloorMaterial
+)
+windowHouse.add(windowFrame)
+
+const windowShape = new THREE.Mesh(
+    new THREE.CircleGeometry(0.4, 6),
+    new THREE.MeshStandardMaterial({
+        color: 0xaab03c,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.95
+    })
+)
+windowShape.position.set(0, 0, -0.02)
+windowHouse.add(windowShape)
 
 // Bushes ---------------------------------
 const bushGeometry = new THREE.SphereGeometry(1, 32, 16, 0)
@@ -394,21 +417,24 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 1)
 const directionalLight = new THREE.DirectionalLight(0xfffffc, 1)
 directionalLight.position.set(2, 10, 0)
 
+const rectAreaLightWindow = new THREE.RectAreaLight(0xffffff, 8, 0.4, 0.4)
+rectAreaLightWindow.position.set(0, 5.3, 1.4)
+
 const rectAreaLightDoor = new THREE.RectAreaLight(0xffffff, 8, 0.5, 2)
 rectAreaLightDoor.position.set(0, 2, 1.5)
 
-scene.add(ambientLight, directionalLight, rectAreaLightDoor)
+scene.add(ambientLight, directionalLight, rectAreaLightWindow, rectAreaLightDoor)
 
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
-camera.position.set(0, 2, 3)
+camera.position.set(0, 5, 5)
 const cameraHelper = new THREE.CameraHelper(camera)
 scene.add(camera, cameraHelper)
 
 // --- Controls ---
 const controls = new OrbitControls(camera, canvas)
-controls.target.set(0, 2, 0)
+controls.target.set(0, 4, 0)
 controls.enableDamping = true
 controls.update()
 
