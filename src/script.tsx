@@ -468,7 +468,7 @@ scene.add(ghost1, ghost2, ghost3)
 const ambientLight = new THREE.AmbientLight(0x86cdff, 0.275)
 
 const directionalLight = new THREE.DirectionalLight(0x86cdff, 2)
-directionalLight.position.set(4, 8, -5)
+directionalLight.position.set(10, 8, -15)
 
 const rectAreaLightWindow = new THREE.RectAreaLight(0xffffff, 4, 0.2, 0.3)
 rectAreaLightWindow.position.set(0, 5.6, 1.3)
@@ -506,6 +506,56 @@ window.addEventListener("resize", () => {
     camera.updateProjectionMatrix()
     renderer.setSize(window.innerWidth, window.innerHeight)
 })
+
+// --- Shadow ---
+// Renderer
+renderer.shadowMap.enabled = true
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
+
+// Cast and receive shadow
+directionalLight.castShadow = true
+ghost1.castShadow = true
+ghost2.castShadow = true
+ghost3.castShadow = true
+
+platform.receiveShadow = true
+house.traverse((child) => {
+    if (child instanceof THREE.Mesh) {
+        child.castShadow = true
+        child.receiveShadow = true
+    }
+})
+graves.traverse((child) => {
+    if(child instanceof THREE.Mesh){
+        child.castShadow = true
+        child.receiveShadow = true
+    }
+})
+bush1.castShadow = true
+bush2.castShadow = true
+bush3.castShadow = true
+
+// Mapping
+directionalLight.shadow.mapSize.width = 256
+directionalLight.shadow.mapSize.height = 256
+directionalLight.shadow.camera.top = 8
+directionalLight.shadow.camera.right = 8
+directionalLight.shadow.camera.bottom = -8
+directionalLight.shadow.camera.left = -8
+directionalLight.shadow.camera.near = 1
+directionalLight.shadow.camera.far = 30
+
+ghost1.shadow.mapSize.width = 256
+ghost1.shadow.mapSize.height = 256
+ghost1.shadow.camera.far = 10
+
+ghost2.shadow.mapSize.width = 256
+ghost2.shadow.mapSize.height = 256
+ghost2.shadow.camera.far = 10
+
+ghost3.shadow.mapSize.width = 256
+ghost3.shadow.mapSize.height = 256
+ghost3.shadow.camera.far = 10
 
 // --- Render Loop ---
 const timer = new Timer()
