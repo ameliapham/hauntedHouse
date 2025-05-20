@@ -93,13 +93,13 @@ const groundFloorNormalTexture = textureLoader.load('public/texture/wall/wood_pl
 groundFloorColorTexture.colorSpace = THREE.SRGBColorSpace
 
 groundFloorColorTexture.center.set(0.5, 0.5)
-groundFloorColorTexture.rotation = Math.PI /2
+groundFloorColorTexture.rotation = Math.PI / 2
 
 groundFloorARMTexture.center.set(0.5, 0.5)
-groundFloorColorTexture.rotation = Math.PI /2
+groundFloorARMTexture.rotation = Math.PI / 2
 
-groundFloorARMTexture.center.set(0.5, 0.5)
-groundFloorColorTexture.rotation = Math.PI /2
+groundFloorNormalTexture.center.set(0.5, 0.5)
+groundFloorNormalTexture.rotation = Math.PI / 2
 
 groundFloorColorTexture.wrapS = groundFloorColorTexture.wrapT = THREE.RepeatWrapping
 groundFloorARMTexture.wrapS = groundFloorARMTexture.wrapT = THREE.RepeatWrapping
@@ -111,6 +111,21 @@ const roofARMTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_
 const roofNormalTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_nor_gl_1k.jpg')
 
 roofColorTexture.colorSpace = THREE.SRGBColorSpace
+
+// Bushes
+const bushColorTexture = textureLoader.load('public/texture/bush/leaves_forest_ground_1k/leaves_forest_ground_diff_1k.webp')
+const bushARMTexture = textureLoader.load('public/texture/bush/leaves_forest_ground_1k/leaves_forest_ground_arm_1k.webp')
+const bushNormalTexture = textureLoader.load('public/texture/bush/leaves_forest_ground_1k/leaves_forest_ground_nor_gl_1k.webp')
+
+bushColorTexture.colorSpace = THREE.SRGBColorSpace
+
+bushColorTexture.repeat.set(3, 2)
+bushARMTexture.repeat.set(3, 2)
+bushNormalTexture.repeat.set(3, 2)
+
+bushColorTexture.wrapS = bushColorTexture.wrapT = THREE.RepeatWrapping
+bushARMTexture.wrapS = bushARMTexture.wrapT = THREE.RepeatWrapping
+bushNormalTexture.wrapS = bushNormalTexture.wrapT = THREE.RepeatWrapping
 
 // --- Objects ---
 // Platform ---------------------------
@@ -379,18 +394,30 @@ windowHouse.add(windowShape)
 
 // Bushes ---------------------------------
 const bushGeometry = new THREE.SphereGeometry(1, 32, 16, 0)
-const bushMaterial = new THREE.MeshStandardMaterial({color: "green"})
+const bushMaterial = new THREE.MeshStandardMaterial({
+    color: 0xa7c957,
+    map: bushColorTexture,
+    aoMap: bushARMTexture,
+    roughnessMap: bushARMTexture,
+    metalnessMap: bushARMTexture,
+    normalMap: bushNormalTexture 
+})
 
 const bush1 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush1.position.set(1.8, 0.5, 0)
+bush1.rotation.z = 1
 
 const bush2 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush2.scale.set(0.5, 0.5, 0.5)
 bush2.position.set(1.5, 0.2, 1.2)
+bush2.rotation.x = -1
 
 const bush3 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush3.scale.set(1.3, 1.3, 1.3)
-bush3.position.set(-1.6, 0.6, -1.7)
+bush3.position.set(-1.5, 0.6, -1.6)
+bush3.rotation.z = -1
+bush3.rotation.y = -0.75
+
 scene.add(bush1, bush2, bush3)
 
 // Graves -------------------------------------
