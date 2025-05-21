@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Timer } from 'three/examples/jsm/misc/Timer.js';
-import GUI from "lil-gui"
+// import GUI from "lil-gui"
 import { Sky } from 'three/examples/jsm/objects/Sky'
 
 console.log("Hello, Three.js with TypeScript!");
@@ -358,7 +358,7 @@ const doorShape = new THREE.Shape()
 doorShape.moveTo(-0.35, 0)
 doorShape.lineTo(-0.5, 1)
 doorShape.lineTo(-0.6, 2)
-doorShape.lineTo(0, 2.6)
+doorShape.lineTo(0, 2.7)
 doorShape.lineTo(0.6, 2)
 doorShape.lineTo(0.5, 1)
 doorShape.lineTo(0.35, 0)
@@ -480,15 +480,16 @@ scene.add(ambientLight, directionalLight, rectAreaLightWindow, rectAreaLightDoor
 
 
 // --- Camera Setup ---
-const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
-camera.position.set(0, 2, 5 )
-const cameraHelper = new THREE.CameraHelper(camera)
-scene.add(camera, cameraHelper)
+const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(3, 4, 7)
 
 // --- Controls ---
 const controls = new OrbitControls(camera, canvas)
-controls.target.set(0, 2, 0)
+controls.target.set(0, 3, 0)
 controls.enableDamping = true
+controls.maxDistance = 50
+controls.minPolarAngle = 0
+controls.maxPolarAngle = Math.PI * 0.55
 controls.update()
 
 // --- Renderer Setup ---
@@ -497,8 +498,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 // --- Debug UI ---
-const gui = new GUI
-gui.close()
+// const gui = new GUI
+// gui.close()
 
 // --- Resize ---
 window.addEventListener("resize", () => {
