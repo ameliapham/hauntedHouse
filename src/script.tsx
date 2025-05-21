@@ -3,7 +3,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Timer } from 'three/examples/jsm/misc/Timer.js';
 import GUI from "lil-gui"
 import { Sky } from 'three/examples/jsm/objects/Sky'
-import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHelper" 
 
 console.log("Hello, Three.js with TypeScript!");
 
@@ -46,9 +45,9 @@ platformDisplacementTexture.wrapS = THREE.RepeatWrapping
 platformDisplacementTexture.wrapT = THREE.RepeatWrapping
 
 // First Floors ------------------------------
-const firstFloorColorTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_diff_1k.jpg')
-const firstFloorARMTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_arm_1k.jpg')
-const firstFloorNormalTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_nor_gl_1k.jpg')
+const firstFloorColorTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_diff_1k.webp')
+const firstFloorARMTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_arm_1k.webp')
+const firstFloorNormalTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_nor_gl_1k.webp')
 
 firstFloorColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -65,9 +64,9 @@ firstFloorNormalTexture.wrapS = THREE.RepeatWrapping
 firstFloorNormalTexture.wrapT = THREE.RepeatWrapping
 
 // Second Floors ------------------------------
-const secondFloorColorTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_diff_1k.jpg')
-const secondFloorARMTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_arm_1k.jpg')
-const secondFloorNormalTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_nor_gl_1k.jpg')
+const secondFloorColorTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_diff_1k.webp')
+const secondFloorARMTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_arm_1k.webp')
+const secondFloorNormalTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_nor_gl_1k.webp')
 
 secondFloorColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -87,9 +86,9 @@ secondFloorNormalTexture.repeat.set(4, 3.5)
 secondFloorNormalTexture.wrapS = secondFloorNormalTexture.wrapT = THREE.RepeatWrapping
 
 // Ground Floor
-const groundFloorColorTexture = textureLoader.load('public/texture/wall/wood_planks_grey_1k/wood_planks_grey_diff_1k.jpg')
-const groundFloorARMTexture = textureLoader.load('public/texture/wall/wood_planks_grey_1k/wood_planks_grey_arm_1k.jpg')
-const groundFloorNormalTexture = textureLoader.load('public/texture/wall/wood_planks_grey_1k/wood_planks_grey_nor_gl_1k.jpg')
+const groundFloorColorTexture = textureLoader.load('public/texture/wall/wood_planks_grey_1k/wood_planks_grey_diff_1k.webp')
+const groundFloorARMTexture = textureLoader.load('public/texture/wall/wood_planks_grey_1k/wood_planks_grey_arm_1k.webp')
+const groundFloorNormalTexture = textureLoader.load('public/texture/wall/wood_planks_grey_1k/wood_planks_grey_nor_gl_1k.webp')
 
 groundFloorColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -107,9 +106,9 @@ groundFloorARMTexture.wrapS = groundFloorARMTexture.wrapT = THREE.RepeatWrapping
 groundFloorNormalTexture.wrapS = groundFloorNormalTexture.wrapT = THREE.RepeatWrapping
 
 // Roof
-const roofColorTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_diff_1k.jpg')
-const roofARMTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_arm_1k.jpg')
-const roofNormalTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_nor_gl_1k.jpg')
+const roofColorTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_diff_1k.webp')
+const roofARMTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_arm_1k.webp')
+const roofNormalTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_nor_gl_1k.webp')
 
 roofColorTexture.colorSpace = THREE.SRGBColorSpace
 
