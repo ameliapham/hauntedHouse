@@ -20,11 +20,11 @@ scene.add(axesHelper)
 const textureLoader = new THREE.TextureLoader()
 
 // Platform ------------------------------
-const platformAlphaTexture = textureLoader.load('public/texture/platform/alpha.webp')
-const platformAColorTexture = textureLoader.load('public/texture/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_diff_1k.webp')
-const platformARMTexture = textureLoader.load('public/texture/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_arm_1k.webp')
-const platformNormalTexture = textureLoader.load('public/texture/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_nor_gl_1k.webp')
-const platformDisplacementTexture = textureLoader.load('public/texture/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_disp_1k.webp')
+const platformAlphaTexture = textureLoader.load('public/textures/platform/alpha.webp')
+const platformAColorTexture = textureLoader.load('public/textures/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_diff_1k.webp')
+const platformARMTexture = textureLoader.load('public/textures/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_arm_1k.webp')
+const platformNormalTexture = textureLoader.load('public/textures/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_nor_gl_1k.webp')
+const platformDisplacementTexture = textureLoader.load('public/textures/platform/coast_sand_rocks_02_1k/coast_sand_rocks_02_disp_1k.webp')
 
 platformAColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -45,9 +45,9 @@ platformDisplacementTexture.wrapS = THREE.RepeatWrapping
 platformDisplacementTexture.wrapT = THREE.RepeatWrapping
 
 // First Floors ------------------------------
-const firstFloorColorTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_diff_1k.webp')
-const firstFloorARMTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_arm_1k.webp')
-const firstFloorNormalTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_nor_gl_1k.webp')
+const firstFloorColorTexture = textureLoader.load('public/textures/wall/green_rough_planks_1k/green_rough_planks_diff_1k.webp')
+const firstFloorARMTexture = textureLoader.load('public/textures/wall/green_rough_planks_1k/green_rough_planks_arm_1k.webp')
+const firstFloorNormalTexture = textureLoader.load('public/textures/wall/green_rough_planks_1k/green_rough_planks_nor_gl_1k.webp')
 
 firstFloorColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -64,9 +64,9 @@ firstFloorNormalTexture.wrapS = THREE.RepeatWrapping
 firstFloorNormalTexture.wrapT = THREE.RepeatWrapping
 
 // Second Floors ------------------------------
-const secondFloorColorTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_diff_1k.webp')
-const secondFloorARMTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_arm_1k.webp')
-const secondFloorNormalTexture = textureLoader.load('public/texture/wall/green_rough_planks_1k/green_rough_planks_nor_gl_1k.webp')
+const secondFloorColorTexture = textureLoader.load('public/textures/wall/green_rough_planks_1k/green_rough_planks_diff_1k.webp')
+const secondFloorARMTexture = textureLoader.load('public/textures/wall/green_rough_planks_1k/green_rough_planks_arm_1k.webp')
+const secondFloorNormalTexture = textureLoader.load('public/textures/wall/green_rough_planks_1k/green_rough_planks_nor_gl_1k.webp')
 
 secondFloorColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -86,9 +86,9 @@ secondFloorNormalTexture.repeat.set(4, 3.5)
 secondFloorNormalTexture.wrapS = secondFloorNormalTexture.wrapT = THREE.RepeatWrapping
 
 // Ground Floor
-const groundFloorColorTexture = textureLoader.load('public/texture/wall/wood_planks_grey_1k/wood_planks_grey_diff_1k.webp')
-const groundFloorARMTexture = textureLoader.load('public/texture/wall/wood_planks_grey_1k/wood_planks_grey_arm_1k.webp')
-const groundFloorNormalTexture = textureLoader.load('public/texture/wall/wood_planks_grey_1k/wood_planks_grey_nor_gl_1k.webp')
+const groundFloorColorTexture = textureLoader.load('public/textures/wall/wood_planks_grey_1k/wood_planks_grey_diff_1k.webp')
+const groundFloorARMTexture = textureLoader.load('public/textures/wall/wood_planks_grey_1k/wood_planks_grey_arm_1k.webp')
+const groundFloorNormalTexture = textureLoader.load('public/textures/wall/wood_planks_grey_1k/wood_planks_grey_nor_gl_1k.webp')
 
 groundFloorColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -106,16 +106,16 @@ groundFloorARMTexture.wrapS = groundFloorARMTexture.wrapT = THREE.RepeatWrapping
 groundFloorNormalTexture.wrapS = groundFloorNormalTexture.wrapT = THREE.RepeatWrapping
 
 // Roof
-const roofColorTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_diff_1k.webp')
-const roofARMTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_arm_1k.webp')
-const roofNormalTexture = textureLoader.load('public/texture/roof/roof_3_1k/roof_3_nor_gl_1k.webp')
+const roofColorTexture = textureLoader.load('public/textures/roof/roof_3_1k/roof_3_diff_1k.webp')
+const roofARMTexture = textureLoader.load('public/textures/roof/roof_3_1k/roof_3_arm_1k.webp')
+const roofNormalTexture = textureLoader.load('public/textures/roof/roof_3_1k/roof_3_nor_gl_1k.webp')
 
 roofColorTexture.colorSpace = THREE.SRGBColorSpace
 
 // Bushes
-const bushColorTexture = textureLoader.load('public/texture/bush/leaves_forest_ground_1k/leaves_forest_ground_diff_1k.webp')
-const bushARMTexture = textureLoader.load('public/texture/bush/leaves_forest_ground_1k/leaves_forest_ground_arm_1k.webp')
-const bushNormalTexture = textureLoader.load('public/texture/bush/leaves_forest_ground_1k/leaves_forest_ground_nor_gl_1k.webp')
+const bushColorTexture = textureLoader.load('public/textures/bush/leaves_forest_ground_1k/leaves_forest_ground_diff_1k.webp')
+const bushARMTexture = textureLoader.load('public/textures/bush/leaves_forest_ground_1k/leaves_forest_ground_arm_1k.webp')
+const bushNormalTexture = textureLoader.load('public/textures/bush/leaves_forest_ground_1k/leaves_forest_ground_nor_gl_1k.webp')
 
 bushColorTexture.colorSpace = THREE.SRGBColorSpace
 
@@ -128,9 +128,9 @@ bushARMTexture.wrapS = bushARMTexture.wrapT = THREE.RepeatWrapping
 bushNormalTexture.wrapS = bushNormalTexture.wrapT = THREE.RepeatWrapping
 
 // Graves
-const graveColorTexture = textureLoader.load('public/texture/grave/plastered_stone_wall_1k/plastered_stone_wall_diff_1k.webp')
-const graveARMTexture = textureLoader.load('public/texture/grave/plastered_stone_wall_1k/plastered_stone_wall_arm_1k.webp')
-const graveNormalTexture = textureLoader.load('public/texture/grave/plastered_stone_wall_1k/plastered_stone_wall_nor_gl_1k.webp')
+const graveColorTexture = textureLoader.load('public/textures/grave/plastered_stone_wall_1k/plastered_stone_wall_diff_1k.webp')
+const graveARMTexture = textureLoader.load('public/textures/grave/plastered_stone_wall_1k/plastered_stone_wall_arm_1k.webp')
+const graveNormalTexture = textureLoader.load('public/textures/grave/plastered_stone_wall_1k/plastered_stone_wall_nor_gl_1k.webp')
 
 graveColorTexture.colorSpace = THREE.SRGBColorSpace
 
