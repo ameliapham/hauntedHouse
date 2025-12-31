@@ -6,7 +6,7 @@
 # Haunted House
 My practice project uses Three.js with TypeScript and Vite.
 
-**Live Demo:** [Experience it here](https://ap-haunted-house.vercel.app/)
+**Live Demo:** [Experience it here](https://amelia-haunted-house.vercel.app/)
 
 ## ✨ Key Features
 - Custom 3D Object with ThreeJS's Geometry
